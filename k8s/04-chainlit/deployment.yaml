@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chainlit-ui
+  namespace: llm-inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chainlit-ui
+  template:
+    metadata:
+      labels:
+        app: chainlit-ui
+    spec:
+      containers:
+      - name: chainlit
+        image: ${ACR_NAME}.azurecr.io/chainlit-ui:latest
+        ports:
+        - containerPort: 7860
+        env:
+        - name: VLLM_SERVER_URL
+          value: "http://vllm-server:8000"
+        - name: LANGFUSE_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: langfuse-credentials
+              key: public-key
+        - name: LANGFUSE_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: langfuse-credentials
+              key: secret-key
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m" 

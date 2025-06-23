@@ -1,16 +1,71 @@
-# Env files
+# Environment variables and secrets
 .env
+.env.*
+*.secret
+secrets/
 
 # Terraform
 *.tfstate
 *.tfstate.*
 .terraform/
+.terraformrc
+terraform.rc
+*.tfvars
+!terraform.tfvars.example
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+crash.log
+crash.*.log
 
-# Kubernetes YAML backups
+# Kubernetes
 *.yaml.bak
+kubeconfig
+*.kubeconfig
+**/k8s/**/*.secret.yaml
+**/k8s/**/secrets.yaml
 
 # Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.python-version
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Docker
 docker-compose.override.yml
+.docker/
+*.env.docker
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store

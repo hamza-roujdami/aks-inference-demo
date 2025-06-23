@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: lustre
+provisioner: lustre.csi.azure.com
+parameters:
+  skuName: Premium_LRS
+  mountOptions: "-o noatime"
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer 

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-qwen
+  namespace: llm-inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm-qwen
+  template:
+    metadata:
+      labels:
+        app: vllm-qwen
+    spec:
+      containers:
+      - name: vllm
+        image: ghcr.io/vllm-project/vllm:latest
+        command: ["python", "-m", "vllm.entrypoints.openai.api_server"]
+        args:
+          - "--model=Qwen/Qwen1.5-1.8B-Chat"
+          - "--tensor-parallel-size=1"
+          - "--gpu-memory-utilization=0.90"
+          - "--max-model-len=8192"
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+          requests:
+            nvidia.com/gpu: 1
+            memory: "16Gi"
+            cpu: "4"
+        volumeMounts:
+        - name: model-weights
+          mountPath: /models
+        env:
+        - name: HUGGING_FACE_HUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-token
+              key: token
+      volumes:
+      - name: model-weights
+        persistentVolumeClaim:
+          claimName: model-weights 

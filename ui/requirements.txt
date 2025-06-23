@@ -1,2 +1,3 @@
-chainlit
-requests
+chainlit==0.7.700
+requests==2.31.0
+langfuse==2.7.0
