@@ -1,0 +1,16 @@
+# Env files
+.env
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Kubernetes YAML backups
+*.yaml.bak
+
+# Python
+__pycache__/
+
+# Docker
+docker-compose.override.yml
