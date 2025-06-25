@@ -1,20 +1,22 @@
-output "resource_group_name" {
-  value = azurerm_resource_group.rg.name
-}
+# ------------------------------------------------------------------------------
+# Root Outputs
+# ------------------------------------------------------------------------------
+# These outputs provide useful information about the created resources.
+# They reference the outputs from the modules.
+# ------------------------------------------------------------------------------
 
 output "aks_cluster_name" {
-  value = azurerm_kubernetes_cluster.aks.name
+  description = "The name of the deployed AKS cluster."
+  value       = module.aks.cluster_name
 }
 
-output "aks_cluster_id" {
-  value = azurerm_kubernetes_cluster.aks.id
+output "acr_login_server" {
+  description = "The login server for the deployed Azure Container Registry."
+  value       = module.aks.acr_login_server
 }
 
 output "kube_config" {
-  value     = azurerm_kubernetes_cluster.aks.kube_config_raw
-  sensitive = true
-}
-
-output "cluster_fqdn" {
-  value = azurerm_kubernetes_cluster.aks.fqdn
+  description = "The raw Kubernetes configuration file for the AKS cluster."
+  value       = module.aks.kube_config
+  sensitive   = true
 } 
