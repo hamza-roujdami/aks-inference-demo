@@ -1,7 +1,9 @@
-# AKS GPU + Lustre Demo with Chainlit & Langfuse
+# Azure AI Inference Infrastructure Starter: AKS, GPUs, Lustre & vLLM
 
-This repo shows how to:
-1. Provision Azure infra (RG, VNet, AKS A100 MIG, NetApp Lustre) via Terraform
+This project is a robust starting point for anyone looking to build scalable AI inference infrastructure on Azure. It leverages Azure Kubernetes Service (AKS) with GPU support, high-performance Lustre storage, and vLLM for efficient large language model serving.
+
+With this repo, you can:
+1. Provision Azure infra (Resource Group, VNet, AKS with A100 MIG GPUs, NetApp Lustre) via Terraform
 2. Deploy Kubernetes workloads: MIG pod, auto-scaling, sample webapp, Lustre CSI mount
 3. Spin up a Chainlit UI to interact with a vLLM server
 4. Trace all LLM calls into Langfuse
